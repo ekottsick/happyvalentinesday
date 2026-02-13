@@ -1,0 +1,155 @@
+/* =======================
+   BODY
+   ======================= */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff9ecf, #ff4f81);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* =======================
+   STATIC FIGHTER JET IMAGE
+   ======================= */
+.jet-static {
+  position: fixed;
+  right: 20px;
+  top: 20%;
+  width: 100px;
+  height: auto;
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* =======================
+   FLOATING HEARTS
+   ======================= */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+/* =======================
+   VALENTINE CARD
+   ======================= */
+.card {
+  text-align: center;
+  background: white;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  position: fixed;      /* change from relative to fixed */
+  top: 20%;             /* vertical position */
+  right: 50px;          /* move to the right side */
+  z-index: 10;
+  max-width: 600px;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color: #ff2e63;
+  font-size: 2.5em;
+}
+
+.buttons {
+  position: relative;
+  height: 80px;
+}
+
+button {
+  padding: 15px 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  position: absolute;
+  transition: all 0.2s ease;
+}
+
+#yesBtn {
+  left: 20%;
+  background-color: #ff2e63;
+  color: white;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 10px #ff2e63, 0 0 20px #ff2e63; }
+  to   { box-shadow: 0 0 20px #ff2e63, 0 0 40px #ff5c8a; }
+}
+
+#noBtn {
+  right: 20%;
+  background-color: #ccc;
+  color: #555;
+}
+
+/* =======================
+   VIDEO & LOVE MESSAGE
+   ======================= */
+.video-container {
+  display: none;
+  margin-top: 10px;
+  width: 320px;
+  height: 180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loveMessage {
+  display: none;
+  font-size: 1.5em;
+  color: #ff2e63;
+  margin-top: 15px;
+}
+
+/* =======================
+   SCROLLING VOWS
+   ======================= */
+.scrolling-text-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;      /* full screen width for huge text */
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  z-index: 5;
+}
+
+.scrolling-text {
+  position: absolute;
+  width: 40%;            /* take most of container */
+  left: 5%;              /* nudge slightly left */
+  transform: translateY(200vh); /* start far below screen */
+  text-align: left;
+  line-height: 2em;
+  white-space: pre-wrap;
+  font-size: 6em;        /* very large */
+  font-weight: bold;
+  color: #ffe066;
+}
+
+.scroll-active .scrolling-text {
+  animation: scrollText 300s linear forwards;
+}
+
+@keyframes scrollText {
+  from { transform: translateY(200vh); }
+  to   { transform: translateY(-120%); }
+}
