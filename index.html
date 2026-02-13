@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine?</title>
+<link rel="stylesheet" href="styles.css"> <!-- use the full CSS from previous message -->
+</head>
+<body>
+
+<!-- SCROLLING VOWS -->
+<div class="scrolling-text-container" id="scrollingContainer">
+  <div class="scrolling-text" id="scrollingText">
+Mary-Kate,
+Three years ago, I met you for the first time on the tennis courts at Narberth Park. A few weeks later, I spent the holiday weekend at your parents’ house in Rhode Island, and shortly after that I began driving to Virginia every other weekend just so I could see you for a day. I was never quite sure what was going to happen next—all I knew was I wanted to spend every minute with you that you would let me. And in those minutes walking down to the river to eat our breakfast, running into Target for aloe vera, and playing tennis with you after a day at work, I fell in love. 
+I have never met someone who sees the world with the awe and wonder that you do. You never miss an opportunity to point out how pretty the colors of the sky are, or how incredible the moon looks that night. No matter the situation, you see the best in it. You soak in the warmth of the sun on the patio, you admire the leaves as they fall from the trees. When the snow is waist high and the temperature is so cold you need ski goggles to prevent your eyelashes from freezing, you gear up for an adventure. When it’s raining, you hurry to feel the drops on your face, hoping for a kiss in the rain like a movie. I am happy to oblige.
+I love that sarcasm has no effect on you. It just does not register. I have told you before that at one point, I had mistaken those who did not understand sarcasm as unintelligent or lacking wit. You have shown me that you are simply so honest and true to yourself that you cannot fathom saying something you don’t mean, nor understanding how someone else could.
+I remember being both impressed, and occasionally frustrated by, your carefree attitude. There were times where it seemed you were flowing through life—not a care in the world and nothing could bother you or stop you. You are mostly unaffected by external problems. Can’t control it? Then why worry about it? I think it’s what makes you creative, optimistic, and determined in the face of adversity. 
+This led to some early struggles as well; I tend to be more rigid in comparison and that caused an occasional clash. In similar moments of frustration, we also revealed our greatest strength: reconciliation. Now I’m not sure “reconciliation” is the most exhilarating strength to have in a relationship. But to me, it is the single most important demonstration of our love.
+When it feels like we can’t catch a break, and we keep running into issues, small or large, building on one another, causing disagreements, stress, and frustration…I always fall back on a singular comfort: I have never, not once, ever felt that your actions towards me were done with malicious intent. There is no revenge, antagonism, or hostility. We don’t always agree, but we always trust that the other is doing their best and is looking out for both of our best interests. I know without a shadow of a doubt that you love me, and I love you, and that no matter what happens, we will figure it out together before sealing it with a hug and a deep breath. 
+And, after all that, what I love most about you, is that your soul is made of the sun. When I am cold or sad, seeing you bathes my skin in warmth and peace. At the end of a hard day or beginning of a great one, you’re always there. Each morning I wake up to you and appreciate your beauty, as if it’s the first time I’ve ever seen something so special. Like the sun, you help me grow—so that I can develop into the greatest version of myself. And you light up any room with your confidence and laugh that I can’t resist. My mood is better when you’re around. I feel at peace.
+Mary-Kate, I promise that you won’t have to cry alone. You will have a hand to squeeze when you’re scared, and someone to celebrate you when you succeed. 
+I promise to depend on you, to trust your judgement, and seek your thoughts.
+I promise to remain patient and do my best to stay calm when everything feels chaotic.
+And I will keep falling in love with you every day, in this life…and any life that comes afterwards. I love you.
+  </div>
+</div>
+
+<!-- VALENTINE CARD -->
+<div class="card" id="cardContent">
+  <h1>Will you be my Valentine?</h1>
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <div class="video-container" id="videoContainer"></div>
+  <div id="loveMessage">I love you to the moon and back. Twice. XOXO 💕</div>
+</div>
+
+<!-- YOUTUBE IFRAME API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+let player;
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const card = document.getElementById("cardContent");
+const videoContainer = document.getElementById("videoContainer");
+const loveMessage = document.getElementById("loveMessage");
+const scrollingContainer = document.getElementById("scrollingContainer");
+
+// NO button dodges + shrinks
+let scale = 1;
+noBtn.addEventListener("mouseover", () => {
+  const cardRect = card.getBoundingClientRect();
+  const maxX = cardRect.width - noBtn.offsetWidth;
+  const maxY = cardRect.height - noBtn.offsetHeight;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+
+  scale *= 0.85;
+  noBtn.style.transform = `scale(${scale})`;
+
+  if (scale < 0.3) noBtn.style.display = "none";
+});
+
+// YES click → show video + message + start scroll
+yesBtn.addEventListener("click", () => {
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+
+  videoContainer.style.display = "block";
+  loveMessage.style.display = "block";
+
+  // show scrolling vows and start animation
+  scrollingContainer.style.display = "block";
+  scrollingContainer.classList.add("scroll-active");
+
+  // play YouTube video starting at 1:07
+  player = new YT.Player('videoContainer', {
+    height: '180',
+    width: '320',
+    videoId: 'ur1cb_OztPQ', // The Painter
+    playerVars: { autoplay: 1, rel: 0, mute: 1, start: 67 },
+    events: { 'onReady': onPlayerReady }
+  });
+});
+
+function onPlayerReady(event) {
+  event.target.playVideo();
+  setTimeout(() => {
+    event.target.unMute();
+  }, 1000);
+}
+
+// Floating hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
